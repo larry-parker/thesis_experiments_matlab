@@ -8,7 +8,8 @@
 filepath = strcat(pwd,'/data/Lista.csv')
 
 data_table = readtable(filepath, 'HeaderLines', 0, 'Delimiter', ',');
-data_table.POWER = str2double(data_table.POWER);
+data_table.POWER = str2double(data_table.POWER);, 
+
 time_table = table2timetable(data_table);
 
 
@@ -61,13 +62,13 @@ saveas(gcf,'graphs/Frequency_domain_original_data.png')
 
 figure(3)
 plot(time_series.TIMESTAMPS,filtered_signal,'r','markerfacecolor', 'w','linew',1)
-xlabel(''), ylabel('Wind POWER')
+xlabel(''), ylabel('Wind power (MW)')
 title('Time domain of filtered signal')
 saveas(gcf,'graphs/Time_domain_filtered_data.png')
 
 figure(4)
 stem(hz, filtered_pow, 'r','ms-','markerfacecolor', 'w', 'linew',3, 'markersize', 10)
-xlabel('Frequency (norm.)'), ylabel('Wind POWER')
+xlabel('Frequency (norm.)'), ylabel('Wind power (MW)')
 %set(gca,'xlim',[max(0, (Index- 30)*(1/N)) (Index+ 30)*(1/N)])
 title('Frequency domain of filtered signal')
 saveas(gcf,'graphs/Frequency_domain_filtered_data.png')
@@ -78,5 +79,5 @@ figure(5)
 plot(time_series.TIMESTAMPS, time_series.POWER,'b', 'linew',2), hold on
 plot(time_series.TIMESTAMPS, filtered_signal,'r', 'linew',2)
 title('Original data (blue) vs filered data (red)')
-ylabel('Wind Power(MW)')
+ylabel('Wind power (MW)')
 saveas(gcf,'graphs/Original_data_VS_filtered_data.png')
